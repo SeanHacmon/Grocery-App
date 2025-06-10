@@ -2,10 +2,10 @@
     npm run dev
 
 # Components
-    ### Search Bar 
+## Search Bar 
       allows to search for food for fixed price
 
-    ### List Preview
+## List Preview
       shows the updated table
 
 
