@@ -1,24 +1,28 @@
 /* Centering container */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
 .button-container {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 30px;               /* Space between buttons */
   margin-top: 30px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 /* Modern, clean button style */
 .custom-button {
   background-color: #1f2937; /* Tailwind-like soft black/blue */
   color: #f9fafb;            /* Almost white text */
-  padding: 16px 36px;        /* Bigger button size */
+  padding: 8px 30px;        /* Bigger button size */
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 500;
   transition: background-color 0.3s ease, transform 0.2s ease;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  font-family: 'Montserrat', sans-serif;
 }
 
 .custom-button:hover {
@@ -27,7 +31,7 @@
 }
 
 .custom-button:active {
-  background-color: #0f172a;
+  background-color: #111827;
   transform: translateY(0);
 }
 
@@ -46,7 +50,7 @@
 }
 
 .table-button:hover {
-  background-color: #1f2937;
+  background-color: #111827;
   transform: scale(1.02);
 }
 

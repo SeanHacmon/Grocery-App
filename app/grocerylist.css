@@ -1,13 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
 .table-container {
   padding: 20px;
   max-width: 800px;
-  margin: 0 auto;
+  margin: 20px auto;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .dictionary-table {
   width: 100%;
   border-collapse: collapse;
-  font-family: Arial, sans-serif;
 }
 
 .dictionary-table th,

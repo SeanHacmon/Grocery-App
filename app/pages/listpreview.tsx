@@ -11,7 +11,7 @@ export function Listpreview({currentList, setCurrentList, totalCost, setTotalCos
         setCurrentList((prevList) => {
             const updatedList = { ...prevList };
             delete updatedList[product];
-            setTotalCost(totalCost-currentList[product][1]);
+            setTotalCost(totalCost-currentList[product][1] > 0 ? totalCost-currentList[product][1] : 0 );
             return updatedList;
         });
     };
@@ -27,7 +27,7 @@ export function Listpreview({currentList, setCurrentList, totalCost, setTotalCos
                 const newTotal = newAmount * price;
                 return { ... prevList, [product]:[newAmount, newTotal]};
             });
-            setTotalCost(totalCost-groceryDict[product]);
+            setTotalCost(totalCost-groceryDict[product] > 0 ? totalCost-groceryDict[product]: 0);
         };
     };
 
