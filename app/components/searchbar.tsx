@@ -1,9 +1,10 @@
-
 import { useState } from "react";
 import { Listpreview } from "~/pages/listpreview";
 import '../searchbar.css';
-import groceryDict from "./groceryList";
+// import ItemDictionary from "./groceryList";
 import '../button.css';
+// import osherAdData from "../data/osherAd.json";
+import itemDict from "./groceryList";
 
 
 export function SearchBar(){
@@ -14,22 +15,23 @@ export function SearchBar(){
     const [totalCost, setTotalCost] = useState(0);
     const [selectedIndex, setSelectedIndex] = useState(-1);
 
+    
     const handleKeyDown = (e) =>{
-        if (!showSuggestions || filteredKeys.length === 0) {return;}
+        if (!showSuggestions || filteredItems.length === 0) {return;}
         switch (e.key) {
             case 'ArrowDown':
                 e.preventDefault();
-                setSelectedIndex(prev => prev < filteredKeys.length-1 ? prev+1 : 0);
+                setSelectedIndex(prev => prev < filteredItems.length-1 ? prev+1 : 0);
                 break;
               
             case 'ArrowUp':
                 e.preventDefault();
-                setSelectedIndex(prev => prev > 0 ? prev-1 : filteredKeys.length-1);
+                setSelectedIndex(prev => prev > 0 ? prev-1 : filteredItems.length-1);
                 break;
             case 'Enter':
                 e.preventDefault();
-                if (selectedIndex >= 0 && selectedIndex < filteredKeys.length) {
-                handleSelect(filteredKeys[selectedIndex]);
+                if (selectedIndex >= 0 && selectedIndex < filteredItems.length) {
+                handleSelect(filteredItems[selectedIndex]);
                 }
                 break;
             case 'Escape':
@@ -40,28 +42,47 @@ export function SearchBar(){
         }
     };
 
-    const filteredKeys = Object.keys(groceryDict).filter(
-        (key) =>
-          key.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    const handleSelect = (item) => {
-        setSearchTerm(item);
+    const filteredItems = Object.keys(itemDict).filter(itemName =>
+        itemName.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    const handleSelect = (itemName) => {
+        setSearchTerm(itemName);
         setShowSuggestions(false);
+        setSelectedIndex(-1);
     }
 
 
 
-    const addProduct = (product) => {
-        const price = groceryDict[product];
-        if (!price) {return;}
-        setCurrentList((prevList) => {
-            const [prevAmount=0, prevTotal=0] = prevList[product] || [0,0];
-            const newAmount = prevAmount+1;
+    const addProduct = (productName) => {
+        // Get item from dictionary
+        const item = itemDict[productName];
+        if (!item || !item.itemprice) {
+            console.log("Product not found or no price:", productName);
+            return;
+        }
+        const price = item.itemprice;
+        
+        setCurrentList(prevList => {
+            const [prevAmount = 0, prevTotal = 0] = prevList[productName] || [0, 0];
+            const newAmount = prevAmount + 1;
             const newTotal = newAmount * price;
-            return { ... prevList, [product]:[newAmount, newTotal]};
+            return { ...prevList, [productName]: [newAmount, newTotal] };
         });
-        setTotalCost(totalCost+price);
-      };
+        
+        setTotalCost(prevTotal => prevTotal + price);
+    };
+    // const addProduct = (product) => {
+    //     const price = groceryDict[product];
+    //     if (!price) {return;}
+    //     setCurrentList((prevList) => {
+    //         const [prevAmount=0, prevTotal=0] = prevList[product] || [0,0];
+    //         const newAmount = prevAmount+1;
+    //         const newTotal = newAmount * price;
+    //         return { ... prevList, [product]:[newAmount, newTotal]};
+    //     });
+    //     setTotalCost(totalCost+price);
+    //   };
 
     return (
         // search 
@@ -69,38 +90,38 @@ export function SearchBar(){
             <div className="search-container">
                 <input
                 type="text"
-                placeholder="Search..."
+                placeholder="...חפש מוצר"
                 value={searchTerm}
                 onChange={(e) => {
                     setSearchTerm(e.target.value);
                     setShowSuggestions(true);
+                    setSelectedIndex(-1);
                 }}
                 onKeyDown={handleKeyDown}
                 onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
                 className="search-input"
                 />
-                {showSuggestions && searchTerm && filteredKeys.length > 0 && (
+                {showSuggestions && searchTerm && filteredItems.length > 0 && (
                     <ul className="suggestions-list">
-                    {filteredKeys.map((key, index) => (
+                    {filteredItems.map((itemName, index) => (
                         <li 
-                            key={key}
-                            onClick={() => handleSelect(key)}
+                            key={itemDict[itemName].itemid}
+                            onClick={() => handleSelect(itemName)}
                             className={index=== selectedIndex ? 'selected' : ''}
                         >
-                            {key}
+                            {itemName}- ₪{itemDict[itemName].itemprice}
+
                         </li>
                     ))}
                     </ul>
                 )}
                 <div className="button-container">
-                    <button className="custom-button" onClick={() => addProduct(searchTerm)}>Add Product</button>
-                    <button className="custom-button" onClick={() => setShowList(true)}>View List</button>
+                    <button className="custom-button" onClick={() => addProduct(searchTerm)}>הוסף מוצר</button>
+                    <button className="custom-button" onClick={() => setShowList(true)}>הצג רשימה</button>
                 </div>
             </div>
             {showList && <Listpreview currentList={currentList} setCurrentList={setCurrentList} addProduct={addProduct}
             totalCost={totalCost} setTotalCost={setTotalCost}/>} 
         </div>
-       
-        // 2 buttons  of view list & add product.
     );
 }

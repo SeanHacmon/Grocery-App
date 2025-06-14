@@ -1,6 +1,6 @@
-import groceryDict from "~/components/groceryList";
+// import groceryDict from "~/components/groceryList";
 import "../grocerylist.css";
-
+import itemDict from "~/components/groceryList";
 
 
 
@@ -10,25 +10,29 @@ export function Listpreview({currentList, setCurrentList, totalCost, setTotalCos
     const deleteProduct = (product) => {
         setCurrentList((prevList) => {
             const updatedList = { ...prevList };
+            const productTotal = currentList[product][1];
             delete updatedList[product];
-            setTotalCost(totalCost-currentList[product][1] > 0 ? totalCost-currentList[product][1] : 0 );
+            setTotalCost(prevTotal => Math.max(0, prevTotal - productTotal));
             return updatedList;
         });
     };
 
 
     const reduceAmount = (product) => {
-        if (currentList[product][0] == 1){deleteProduct(product);}
-        else if (currentList[product][0] >= 1){
-            const price = groceryDict[product];
+        if (currentList[product][0] === 1) {
+            deleteProduct(product);
+        } else if (currentList[product][0] >= 1) {
+            const price = itemDict[product]?.itemprice;
+            if (!price) return;
+            
             setCurrentList((prevList) => {
-                const [prevAmount=0, prevTotal=0] = prevList[product] || [0,0];
-                const newAmount = prevAmount-1;
+                const [prevAmount = 0] = prevList[product] || [0, 0];
+                const newAmount = prevAmount - 1;
                 const newTotal = newAmount * price;
-                return { ... prevList, [product]:[newAmount, newTotal]};
+                return { ...prevList, [product]: [newAmount, newTotal] };
             });
-            setTotalCost(totalCost-groceryDict[product] > 0 ? totalCost-groceryDict[product]: 0);
-        };
+            setTotalCost(prevTotal => Math.max(0, prevTotal - price));
+        }
     };
 
     return (
@@ -46,7 +50,7 @@ export function Listpreview({currentList, setCurrentList, totalCost, setTotalCos
                         <tr key={product}>
                             <td>{product}</td>
                             <td>{amount}</td>
-                            <td>{total}</td>
+                            <td>₪ {total}</td>
                             <td><button className="table-button" onClick={() => addProduct(product)}> ➕</button></td>
                             <td><button className="table-button" onClick={() => reduceAmount(product)}> ➖</button></td>
                             <td><button className="table-button" onClick={() => deleteProduct(product)}> 🗑️</button></td>
@@ -54,7 +58,7 @@ export function Listpreview({currentList, setCurrentList, totalCost, setTotalCos
                     ))}
                     <tr className="total-row">
                     <td className="total-label" colSpan="2">Total Cost:</td>
-                    <td>₪{totalCost}</td>
+                    <td>₪ {totalCost}</td>
                     </tr>
                 </tbody>
             </table>
