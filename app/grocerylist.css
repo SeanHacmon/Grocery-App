@@ -1,14 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
 .table-container {
-  padding: 20px;
-  max-width: 800px;
-  margin: 20px auto;
+  display: flex;
+  gap: 50px; 
   font-family: 'Montserrat', sans-serif;
 }
 
 .dictionary-table {
-  width: 100%;
+  /* display: flex; */
+  /* gap: 50px;  */
+  /* width: 0%; */
   border-collapse: collapse;
 }
 
@@ -43,6 +44,15 @@
 }
 
 .table-product-image {
-  height: 30px;
+  height: 60px;
+  width: 250px;
   border-radius: 4px;
+  margin-bottom: 10px;
+}
+ 
+.table-column {
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

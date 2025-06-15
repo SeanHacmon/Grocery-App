@@ -36,43 +36,77 @@ export function Listpreview({currentList, setCurrentList, totalCost, setTotalCos
     };
 
     return (
-        <div className="table-container">
-            <table className="dictionary-table">
-                <thead>
-                    <tr>
-                        <th> Product</th>
-                        <th> Market Brand</th>
-                        <th> Amount</th>
-                        <th> Cost</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {Object.entries(currentList).map(([product,[amount, total]]) => (
-                        <tr key={product}>
-                            <td>{product}</td>
-                            <td>
-                                <img
-                                     src={'app/images/OsherAd Image.png'} 
-                                     alt={product}
-                                     className="table-product-image"
-                                     onError={(e) => {
-                                         e.target.src = 'app/images/OsherAd Image.png';
-                                     }}
-                                />
-                            </td>
-                            <td>{amount}</td>
-                            <td>₪ {total}</td>
-                            <td><button className="table-button" onClick={() => addProduct(product)}> ➕</button></td>
-                            <td><button className="table-button" onClick={() => reduceAmount(product)}> ➖</button></td>
-                            <td><button className="table-button" onClick={() => deleteProduct(product)}> 🗑️</button></td>
+        <span className="table-container">
+            <div className="table-column">
+                <img
+                    src={'app/images/OsherAd Image.png'} 
+                    // alt={product}
+                    className="table-product-image"
+                    onError={(e) => {
+                        e.target.src = 'app/images/OsherAd Image.png';
+                    }}
+                />
+                <table className="dictionary-table">
+                    <thead>
+                        <tr>
+                            <th> Product</th>
+                            <th> Amount</th>
+                            <th> Cost</th>
                         </tr>
-                    ))}
-                    <tr className="total-row">
-                    <td className="total-label" colSpan="2">Total Cost:</td>
-                    <td>₪ {totalCost}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        {Object.entries(currentList).map(([product,[amount, total]]) => (
+                            <tr key={product}>
+                                <td>{product}</td>
+                                <td>{amount}</td>
+                                <td>₪ {total}</td>
+                                <td><button className="table-button" onClick={() => addProduct(product)}> ➕</button></td>
+                                <td><button className="table-button" onClick={() => reduceAmount(product)}> ➖</button></td>
+                                <td><button className="table-button" onClick={() => deleteProduct(product)}> 🗑️</button></td>
+                            </tr>
+                        ))}
+                        <tr className="total-row">
+                        <td className="total-label" colSpan="2">Total Cost:</td>
+                        <td>₪ {totalCost}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div className="table-column">
+                <img
+                    src={'app/images/ramiLevy Image.png'} 
+                    // alt={product}
+                    className="table-product-image"
+                    onError={(e) => {
+                        e.target.src = 'app/images/OsherAd Image.png';
+                    }}
+                />
+                <table className="dictionary-table">
+                    <thead>
+                        <tr>
+                            <th> Product</th>
+                            <th> Amount</th>
+                            <th> Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {Object.entries(currentList).map(([product,[amount, total]]) => (
+                            <tr key={product}>
+                                <td>{product}</td>
+                                <td>{amount}</td>
+                                <td>₪ {total}</td>
+                                <td><button className="table-button" onClick={() => addProduct(product)}> ➕</button></td>
+                                <td><button className="table-button" onClick={() => reduceAmount(product)}> ➖</button></td>
+                                <td><button className="table-button" onClick={() => deleteProduct(product)}> 🗑️</button></td>
+                            </tr>
+                        ))}
+                        <tr className="total-row">
+                        <td className="total-label" colSpan="2">Total Cost:</td>
+                        <td>₪ {totalCost}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </span>
     );
 }
