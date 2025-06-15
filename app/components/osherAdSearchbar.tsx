@@ -1,20 +1,18 @@
 import { useState } from "react";
 import { Listpreview } from "~/pages/listpreview";
 import '../searchbar.css';
-// import ItemDictionary from "./groceryList";
 import '../button.css';
-// import osherAdData from "../data/osherAd.json";
-import itemDict from "./groceryList";
+import osherAdItemDict from "./groceryList";
 
 
-export function SearchBar(){
+export function OsherAdSearchBar(){
     const [searchTerm, setSearchTerm] = useState('');
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [showList, setShowList] = useState(false);
     const [currentList, setCurrentList] = useState({});
     const [totalCost, setTotalCost] = useState(0);
     const [selectedIndex, setSelectedIndex] = useState(-1);
-
+    const itemDict = osherAdItemDict;
     
     const handleKeyDown = (e) =>{
         if (!showSuggestions || filteredItems.length === 0) {return;}
@@ -72,17 +70,6 @@ export function SearchBar(){
         
         setTotalCost(prevTotal => prevTotal + price);
     };
-    // const addProduct = (product) => {
-    //     const price = groceryDict[product];
-    //     if (!price) {return;}
-    //     setCurrentList((prevList) => {
-    //         const [prevAmount=0, prevTotal=0] = prevList[product] || [0,0];
-    //         const newAmount = prevAmount+1;
-    //         const newTotal = newAmount * price;
-    //         return { ... prevList, [product]:[newAmount, newTotal]};
-    //     });
-    //     setTotalCost(totalCost+price);
-    //   };
 
     return (
         // search 
@@ -110,7 +97,16 @@ export function SearchBar(){
                             className={index=== selectedIndex ? 'selected' : ''}
                         >
                             {itemName}- ₪{itemDict[itemName].itemprice}
-
+                            <span>
+                                <img
+                                        src={'app/images/OsherAd Image.png'} 
+                                        alt={itemName}
+                                        className="search-product-image"
+                                        onError={(e) => {
+                                            e.target.src = 'app/images/OsherAd Image.png';
+                                        }}
+                                    />
+                            </span>    
                         </li>
                     ))}
                     </ul>

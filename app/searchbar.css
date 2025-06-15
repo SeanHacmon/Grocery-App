@@ -64,3 +64,8 @@
   background-color: #111827;
   color: white;
 }
+
+.search-product-image{
+  height: 15px;
+  border-radius: 4px;
+}

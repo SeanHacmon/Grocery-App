@@ -41,3 +41,8 @@
 .total-label  {
   text-align: right;
 }
+
+.table-product-image {
+  height: 30px;
+  border-radius: 4px;
+}

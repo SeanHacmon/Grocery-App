@@ -1,6 +1,6 @@
 // import groceryDict from "~/components/groceryList";
 import "../grocerylist.css";
-import itemDict from "~/components/groceryList";
+import osherAdItemDict from "~/components/groceryList";
 
 
 
@@ -22,7 +22,7 @@ export function Listpreview({currentList, setCurrentList, totalCost, setTotalCos
         if (currentList[product][0] === 1) {
             deleteProduct(product);
         } else if (currentList[product][0] >= 1) {
-            const price = itemDict[product]?.itemprice;
+            const price = osherAdItemDict[product]?.itemprice;
             if (!price) return;
             
             setCurrentList((prevList) => {
@@ -41,6 +41,7 @@ export function Listpreview({currentList, setCurrentList, totalCost, setTotalCos
                 <thead>
                     <tr>
                         <th> Product</th>
+                        <th> Market Brand</th>
                         <th> Amount</th>
                         <th> Cost</th>
                     </tr>
@@ -49,6 +50,16 @@ export function Listpreview({currentList, setCurrentList, totalCost, setTotalCos
                     {Object.entries(currentList).map(([product,[amount, total]]) => (
                         <tr key={product}>
                             <td>{product}</td>
+                            <td>
+                                <img
+                                     src={'app/images/OsherAd Image.png'} 
+                                     alt={product}
+                                     className="table-product-image"
+                                     onError={(e) => {
+                                         e.target.src = 'app/images/OsherAd Image.png';
+                                     }}
+                                />
+                            </td>
                             <td>{amount}</td>
                             <td>₪ {total}</td>
                             <td><button className="table-button" onClick={() => addProduct(product)}> ➕</button></td>
