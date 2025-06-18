@@ -36,7 +36,7 @@
 }
 
 .table-button { 
-  color: white;
+  color: rgb(0, 0, 0);
   border: none;
   border-radius: 8px;
   padding: 8px 16px;
@@ -50,11 +50,11 @@
 }
 
 .table-button:hover {
-  background-color: #111827;
+  background-color: #ffffff;
   transform: scale(1.02);
 }
 
 .table-button:active {
-  background-color: #48785a;
+  background-color: #d1d1d1;
   transform: scale(1);
 }
