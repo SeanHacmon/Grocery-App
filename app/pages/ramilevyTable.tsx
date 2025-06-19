@@ -79,8 +79,8 @@ export function RamiLevyTable({
                         <tr className="total-row">
                             <td className="total-label" colSpan="2">Total Cost:</td>
                             <td>₪ {totalCostRami.toFixed(2)}</td>
-                            <td colSpan="3"></td>
-                            <td><button className="table-button" onClick={() => clearAllProductsRami()}> Clear 🗑️</button></td>
+                            {/* <td colSpan="3"></td> */}
+                            <td colSpan="3"><button className="table-button" onClick={() => clearAllProductsRami()}> Clear 🗑️</button></td>
                         </tr>
                     </tbody>
                 </table>

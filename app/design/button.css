@@ -5,16 +5,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 30px;               /* Space between buttons */
+  gap: 30px;              
   margin-top: 30px;
   font-family: 'Montserrat', sans-serif;
 }
 
-/* Modern, clean button style */
+
 .custom-button {
-  background-color: #1f2937; /* Tailwind-like soft black/blue */
-  color: #f9fafb;            /* Almost white text */
-  padding: 8px 30px;        /* Bigger button size */
+  background-color: #151d28; 
+  color: #f9fafb;            
+  padding: 8px 30px;        
   border: none;
   border-radius: 12px;
   cursor: pointer;
@@ -26,12 +26,12 @@
 }
 
 .custom-button:hover {
-  background-color: #111827; /* Slightly darker on hover */
+  background-color: #151d28; /* Slightly darker on hover */
   transform: translateY(-3px);
 }
 
 .custom-button:active {
-  background-color: #111827;
+  background-color: #151d28;
   transform: translateY(0);
 }
 

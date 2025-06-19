@@ -50,6 +50,7 @@ function createMarketDicts(data) {
                     unitofmeasureprice: item.ramiLevy.unitofmeasureprice || null,
                     image: `https://img.rami-levy.co.il/product/${item.itemcode}/small.jpg` || null
                 };
+                // if (!item.itemcode) console.warn('Missing itemcode for:', itemName);
             }
         });
         for (const [itemName, url] of Object.entries(vegetableImages)) {

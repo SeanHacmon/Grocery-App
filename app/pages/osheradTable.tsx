@@ -78,8 +78,7 @@ export function OsherAdTable({
                         <tr className="total-row">
                             <td className="total-label" colSpan="2">Total Cost:</td>
                             <td>₪ {totalCostOsher.toFixed(2)}</td>
-                            <td colSpan="3"></td>
-                            <td><button className="table-button" onClick={() => clearAllProductsOsher()}> Clear 🗑️ </button></td>
+                            <td colSpan="3"><button className="table-button" onClick={() => clearAllProductsOsher()}> Clear 🗑️ </button></td>
                         </tr>
                     </tbody>
                 </table>
