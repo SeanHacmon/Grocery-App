@@ -1,6 +1,6 @@
 import { useState } from "react";
-import '~/design/searchbar.css';
-import '~/design/button.css';
+import '../design/searchbar.css';
+import '../design/button.css';
 import { osherAdDict, ramiLevyDict, mahsaniAshukDict } from "./groceryList";
 
 export function SearchBar({

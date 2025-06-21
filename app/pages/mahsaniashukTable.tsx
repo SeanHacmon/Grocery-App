@@ -1,5 +1,5 @@
-import "~/design/grocerylist.css";
-import { mahsaniAshukDict } from "~/components/groceryList"; // Add this import
+import "../design/grocerylist.css";
+import { mahsaniAshukDict } from "../components/groceryList"; // Add this import
 
 export function MahsaniAshukTable({
     currentListOsher, 
@@ -55,10 +55,10 @@ export function MahsaniAshukTable({
         <div className="table-container"> 
             <div className="table-column">
                 <img
-                    src={'app/images/mahsaniAshuk image.png'} 
+                    src={'images/mahsaniAshuk-image.png'}
                     className="table-product-image"
                     onError={(e) => {
-                        e.target.src = 'app/images/mahsaniAshuk Image.png';
+                        e.target.src = '/images/mahsaniAshuk-image.png';
                     }}
                 />
                 <table className="dictionary-table">

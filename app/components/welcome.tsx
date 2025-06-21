@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { SearchBar } from "./searchbar";
-import { TablesPage } from "~/pages/tablesPage";
-import { osherAdDict, ramiLevyDict, mahsaniAshukDict } from '~/components/groceryList'
-import "~/design/login.css";
+import { SearchBar } from "../components/searchbar";
+import { TablesPage } from "../pages/tablesPage";
+import { osherAdDict, ramiLevyDict, mahsaniAshukDict } from '../components/groceryList'
+import "../design/login.css";
 
 export function Welcome() {
   // Navigation state

@@ -1,5 +1,5 @@
-import "~/design/grocerylist.css";
-import { ramiLevyDict } from "~/components/groceryList"; // Add this import
+import "../design/grocerylist.css";
+import { ramiLevyDict } from "../components/groceryList"; // Add this import
 
 export function RamiLevyTable({
     currentListOsher, 
@@ -50,10 +50,10 @@ export function RamiLevyTable({
         <div className="table-container"> 
             <div className="table-column">
                 <img
-                    src={'app/images/ramiLevy Image.png'} 
+                    src={'/images/ramiLevy-image.png'}
                     className="table-product-image"
                     onError={(e) => {
-                        e.target.src = 'app/images/ramiLevy Image.png';
+                        e.target.src = '/images/ramiLevy-image.png';
                     }}
                 />
                 <table className="dictionary-table">

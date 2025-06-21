@@ -1,5 +1,5 @@
-import "~/design/grocerylist.css";
-import { osherAdDict } from "~/components/groceryList"; // Add this import
+import "../design/grocerylist.css";
+import { osherAdDict } from "../components/groceryList"; // Add this import
 
 export function OsherAdTable({
     currentListOsher, 
@@ -49,10 +49,10 @@ export function OsherAdTable({
         <div className="table-container"> {/* Changed from span to div */}
             <div className="table-column">
                 <img
-                    src={'app/images/OsherAd Image.png'} 
+                    src={'/images/OsherAd-image.png'}
                     className="table-product-image"
                     onError={(e) => {
-                        e.target.src = 'app/images/OsherAd Image.png';
+                        e.target.src = '/images/OsherAd-image.png';
                     }}
                 />
                 <table className="dictionary-table">

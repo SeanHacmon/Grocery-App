@@ -112,7 +112,7 @@ h3 {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 body {
-  background-image: url('/Users/seanhakmon/Projects/PortfolioProjects/GroceriesApp/app/images/background.jpg');
+  background-image: url('/images/background.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
