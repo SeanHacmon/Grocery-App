@@ -2,13 +2,14 @@
   "name": "groceriesapp",
   "private": true,
   "type": "module",
-  "homepage": "https://yourusername.github.io/your-repo-name",
+  "homepage": "https://SeanHacmon.github.io/Grocery-App",
   "scripts": {
-    "build": "react-router build",
+    "build": "cross-env NODE_ENV=production react-router build",
+    "build:gh": "cross-env NODE_ENV=production VITE_BASE_PATH=/Grocery-App/ react-router build",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
-    "predeploy": "npm run build",
+    "predeploy": "npm run build:gh",
     "deploy": "gh-pages -d build/client"
   },
   "dependencies": {
@@ -25,6 +26,7 @@
     "@types/node": "^20",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
+    "cross-env": "^7.0.3",
     "gh-pages": "^6.0.0",
     "tailwindcss": "^4.1.4",
     "typescript": "^5.8.3",
