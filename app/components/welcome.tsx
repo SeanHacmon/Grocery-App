@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { SearchBar } from "./searchbar";
 import { TablesPage } from "~/pages/tablesPage";
-import { osherAdDict, ramiLevyDict } from '~/components/groceryList'
+import { osherAdDict, ramiLevyDict, mahsaniAshukDict } from '~/components/groceryList'
 import "~/design/login.css";
 
 export function Welcome() {
@@ -11,8 +11,10 @@ export function Welcome() {
   // Shopping lists state
   const [currentListOsher, setCurrentListOsher] = useState({});
   const [currentListRami, setCurrentListRami] = useState({});
+  const [currentListMahsani, setCurrentListMahsani] = useState({});
   const [totalCostOsher, setTotalCostOsher] = useState(0);
   const [totalCostRami, setTotalCostRami] = useState(0);
+  const [totalCostMahsani, setTotalCostMahsani] = useState(0);
 
   const addProductToOsher = (productName) => {
     const item = osherAdDict[productName];
@@ -40,9 +42,23 @@ export function Welcome() {
     setTotalCostRami(prev => prev + price);
   };
 
-  const addProductToBoth = (productName) => {
+  const addProductToMahsani = (productName) => {
+    const item = mahsaniAshukDict[productName];
+    if (!item || !item.itemprice) return;
+
+    const price = item.itemprice;
+    setCurrentListMahsani(prev => {
+      const [prevAmount = 0] = prev[productName] || [];
+      const newAmount = prevAmount + 1;
+      return { ...prev, [productName]: [newAmount, newAmount * price] };
+    });
+    setTotalCostMahsani(prev => prev + price);
+  };
+
+  const addProductToAll = (productName) => {
     addProductToOsher(productName);
     addProductToRami(productName);
+    addProductToMahsani(productName);
   };
 
   // Navigation functions
@@ -57,12 +73,17 @@ export function Welcome() {
         setCurrentListOsher={setCurrentListOsher}
         currentListRami={currentListRami}
         setCurrentListRami={setCurrentListRami}
+        currentListMahsani={currentListMahsani}
+        setCurrentListMahsani={setCurrentListMahsani}
         addProductToOsher={addProductToOsher}
         addProductToRami={addProductToRami}
+        addProductToMahsani={addProductToMahsani}
         totalCostOsher={totalCostOsher}
         setTotalCostOsher={setTotalCostOsher}
         totalCostRami={totalCostRami}
         setTotalCostRami={setTotalCostRami}
+        totalCostMahsani={totalCostMahsani}
+        setTotalCostMahsani={setTotalCostMahsani}
         onBackToSearch={showSearch}
       />
     );
@@ -77,13 +98,18 @@ export function Welcome() {
         setCurrentListOsher={setCurrentListOsher}
         currentListRami={currentListRami}
         setCurrentListRami={setCurrentListRami}
+        currentListMahsani={currentListMahsani}
+        setCurrentListMahsani={setCurrentListMahsani}
         totalCostOsher={totalCostOsher}
         setTotalCostOsher={setTotalCostOsher}
         totalCostRami={totalCostRami}
         setTotalCostRami={setTotalCostRami}
+        totalCostMahsani={totalCostMahsani}
+        setTotalCostMahsani={setTotalCostMahsani}
         addProductToOsher={addProductToOsher}
         addProductToRami={addProductToRami}
-        addProductToBoth={addProductToBoth}
+        addProductToMahsani={addProductToMahsani}
+        addProductToAll={addProductToAll}
         onShowTables={showTables}
       />
     </div>

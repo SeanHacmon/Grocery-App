@@ -6,11 +6,12 @@ function createMarketDicts(data) {
         
         if (!data || !Array.isArray(data)) {
             console.warn('Combined market data is not available or not an array:', data);
-            return { osherAdDict: {}, ramiLevyDict: {} };
+            return { osherAdDict: {}, ramiLevyDict: {}, mahsaniAshukDict: {} };
         }
 
         const osherAdDict = {};
         const ramiLevyDict = {};
+        const mahsaniAshukDict = {};
 
         data.forEach((item, index) => {
             if (!item || typeof item !== 'object') {
@@ -52,7 +53,22 @@ function createMarketDicts(data) {
                 };
                 // if (!item.itemcode) console.warn('Missing itemcode for:', itemName);
             }
+
+            // Process MahsaniAshuk data
+            if (item.mahsaniAshuk && item.mahsaniAshuk.itemprice && 
+                item.mahsaniAshuk.itemprice !== "" && item.mahsaniAshuk.itemprice !== "0") {
+                mahsaniAshukDict[itemName] = {
+                    itemprice: item.mahsaniAshuk.itemprice,
+                    quantity: item.mahsaniAshuk.quantity || null,
+                    itemid: item.mahsaniAshuk.itemid || null,
+                    itemcode: item.itemcode || null,
+                    unitofmeasure: item.mahsaniAshuk.unitofmeasure || null,
+                    unitofmeasureprice: item.mahsaniAshuk.unitofmeasureprice || null,
+                    image: `https://img.rami-levy.co.il/product/${item.itemcode}/small.jpg` || null
+                };
+            }
         });
+        
         for (const [itemName, url] of Object.entries(vegetableImages)) {
             if (ramiLevyDict[itemName]) {
               ramiLevyDict[itemName].image = url;
@@ -62,23 +78,29 @@ function createMarketDicts(data) {
             if (osherAdDict[itemName]) {
               osherAdDict[itemName].image = url;
             }
-        } 
+        }
+        for (const [itemName, url] of Object.entries(vegetableImages)) {
+            if (mahsaniAshukDict[itemName]) {
+              mahsaniAshukDict[itemName].image = url;
+            }
+        }
 
-        return { osherAdDict, ramiLevyDict };
+        return { osherAdDict, ramiLevyDict, mahsaniAshukDict };
     } catch (error) {
         console.error('Error processing combined market data:', error);
-        return { osherAdDict: {}, ramiLevyDict: {} };
+        return { osherAdDict: {}, ramiLevyDict: {}, mahsaniAshukDict: {} };
     }
 }
 
 // Create dictionaries with error handling
-const { osherAdDict, ramiLevyDict } = createMarketDicts(combinedMarketData);
+const { osherAdDict, ramiLevyDict, mahsaniAshukDict } = createMarketDicts(combinedMarketData);
 
 // Log statistics
 // console.log('Data processing completed:');
 // console.log(`OsherAd items: ${Object.keys(osherAdDict).length}`);
 // console.log(`RamiLevy items: ${Object.keys(ramiLevyDict).length}`);
+// console.log(`MahsaniAshuk items: ${Object.keys(mahsaniAshukDict).length}`);
 
-export { osherAdDict, ramiLevyDict };
-// export default { osherAdDict, ramiLevyDict };
-// export default osherAdDict && ramiLevyDict;
+export { osherAdDict, ramiLevyDict, mahsaniAshukDict };
+// export default { osherAdDict, ramiLevyDict, mahsaniAshukDict };
+// export default osherAdDict && ramiLevyDict && mahsaniAshukDict;

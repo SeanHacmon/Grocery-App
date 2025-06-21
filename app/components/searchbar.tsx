@@ -1,20 +1,25 @@
 import { useState } from "react";
 import '~/design/searchbar.css';
 import '~/design/button.css';
-import { osherAdDict, ramiLevyDict } from "./groceryList";
+import { osherAdDict, ramiLevyDict, mahsaniAshukDict } from "./groceryList";
 
 export function SearchBar({
   currentListOsher,
   setCurrentListOsher,
   currentListRami,
   setCurrentListRami,
+  currentListMahsani,
+  setCurrentListMahsani,
   totalCostOsher,
   setTotalCostOsher,
   totalCostRami,
   setTotalCostRami,
+  totalCostMahsani,
+  setTotalCostMahsani,
   addProductToOsher,
   addProductToRami,
-  addProductToBoth,
+  addProductToMahsani,
+  addProductToAll,
   onShowTables
 }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -24,7 +29,8 @@ export function SearchBar({
 
   const allItemNames = new Set([
     ...Object.keys(osherAdDict),
-    ...Object.keys(ramiLevyDict)
+    ...Object.keys(ramiLevyDict),
+    ...Object.keys(mahsaniAshukDict)
   ]);
 
   const filteredItems = Array.from(allItemNames).filter(itemName =>
@@ -95,6 +101,7 @@ export function SearchBar({
             {filteredItems.map((itemName, index) => {
               const osherPrice = osherAdDict[itemName]?.itemprice;
               const ramiPrice = ramiLevyDict[itemName]?.itemprice;
+              const mahsaniPrice = mahsaniAshukDict[itemName]?.itemprice;
 
               return (
                 <li
@@ -105,8 +112,10 @@ export function SearchBar({
                   <div>{itemName}</div>
                   <div>
                     {osherPrice && <span>אושר אד: ₪{osherPrice}</span>}
-                    {osherPrice && ramiPrice && <span> | </span>}
+                    {(osherPrice && ramiPrice) && <span> | </span>}
                     {ramiPrice && <span>רמי לוי: ₪{ramiPrice}</span>}
+                    {((osherPrice || ramiPrice) && mahsaniPrice) && <span> | </span>}
+                    {mahsaniPrice && <span>מחסני השוק: ₪{mahsaniPrice}</span>}
                   </div>
                 </li>
               );
@@ -134,9 +143,10 @@ export function SearchBar({
             {filteredItems.map((itemName) => {
               const ramiItem = ramiLevyDict[itemName];
               const osherItem = osherAdDict[itemName];
+              const mahsaniItem = mahsaniAshukDict[itemName];
               // const imageCode = ramiItem?.itemcode || 'default';
               // const imageCode = ramiItem?.itemcode || osherItem?.itemcode || 'default';
-              const imageCode = ramiItem?.image || osherItem?.image || 'https://img.rami-levy.co.il/product/default/small.jpg';
+              const imageCode = ramiItem?.image || osherItem?.image || mahsaniItem?.image || 'https://img.rami-levy.co.il/product/default/small.jpg';
               return (
                 <div key={itemName} className="product-card">
                   <div className="product-image">
@@ -154,7 +164,7 @@ export function SearchBar({
                   </div>
                   <div className="product-info">
                     <h4 className="product-name">{itemName}</h4>
-                    <button className="custom-button" onClick={() => addProductToBoth(itemName)}>
+                    <button className="custom-button" onClick={() => addProductToAll(itemName)}>
                       הוסף מוצר
                     </button>
                   </div>
