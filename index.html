@@ -7,7 +7,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"/>
-    <link rel="stylesheet" href="./client/assets/home-BdNU43T4.css"/>
     <style>
         body {
             margin: 0;
@@ -15,45 +14,109 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
         }
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .app-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            padding: 40px;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+        .search-input {
+            padding: 12px 16px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            text-align: right;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .button {
+            background-color: #151d28;
+            color: #f9fafb;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+        .search-results {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 8px;
+            display: none;
+        }
+        .about-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 8px;
+            font-size: 14px;
+            color: #666;
+        }
+        h1 { color: #333; margin-bottom: 10px; }
+        h3 { color: #666; font-weight: 400; margin-bottom: 30px; }
     </style>
 </head>
 <body>
-    <div id="root">
-        <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background: rgba(255,255,255,0.95); margin: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-            <div style="text-align: center; padding: 20px;">
-                <h1 style="color: #333; margin-bottom: 20px;">🛒 Grocery App</h1>
-                <h3 style="color: #666; font-weight: 400; margin-bottom: 30px;">חיפוש מוצרים ברשתות המזון</h3>
+    <div class="main-container">
+        <div class="app-card">
+            <h1>🛒 Grocery App</h1>
+            <h3>חיפוש מוצרים ברשתות המזון</h3>
+            
+            <div>
+                <input type="text" placeholder="...חפש מוצר" class="search-input" id="searchInput">
+            </div>
+            
+            <div style="margin: 20px 0;">
+                <button class="button" onclick="performSearch()">חיפוש</button>
+                <button class="button" onclick="showLists()">הצג רשימות</button>
+            </div>
+            
+            <div id="searchResults" class="search-results">
+                <h4>תוצאות חיפוש</h4>
+                <div id="resultsList"></div>
+            </div>
+            
+            <div class="about-section">
+                <p><strong>About this app:</strong><br>
+                This is a grocery price comparison app for Israeli supermarkets:<br>
+                🏪 Rami Levy • Osher Ad • Mahsani Ashuk</p>
                 
-                <div style="margin-bottom: 30px;">
-                    <input type="text" placeholder="...חפש מוצר" style="padding: 12px 16px; font-size: 16px; border: 1px solid #ddd; border-radius: 8px; width: 300px; max-width: 90%; text-align: right;" id="searchInput">
-                </div>
+                <p style="margin-top: 15px;">
+                <em>The full React version is being deployed. This is a working preview.</em><br>
+                <a href="https://github.com/seanhakmon/Grocery-App" target="_blank" style="color: #007bff; text-decoration: none;">�� View source on GitHub</a>
+                </p>
                 
-                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                    <button style="background-color: #151d28; color: #f9fafb; padding: 12px 30px; border: none; border-radius: 12px; cursor: pointer; font-size: 16px; font-weight: 500;" onclick="performSearch()">חיפוש</button>
-                    <button style="background-color: #151d28; color: #f9fafb; padding: 12px 30px; border: none; border-radius: 12px; cursor: pointer; font-size: 16px; font-weight: 500;" onclick="showLists()">הצג רשימות</button>
-                </div>
-                
-                <div id="searchResults" style="margin-top: 30px; display: none;">
-                    <h4>תוצאות חיפוש</h4>
-                    <div id="resultsList"></div>
-                </div>
-                
-                <div style="margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.8); border-radius: 8px;">
-                    <p style="color: #666; margin: 0;">
-                        <strong>About this app:</strong><br>
-                        This is a grocery price comparison app for Israeli supermarkets (Rami Levy, Osher Ad, Mahsani Ashuk).
-                        <br><br>
-                        <em>Note: The full React app is currently having deployment issues. This is a simplified version.</em>
-                        <br>
-                        <a href="https://github.com/seanhakmon/Grocery-App" target="_blank" style="color: #007bff; text-decoration: none;">View source on GitHub</a>
-                    </p>
-                </div>
+                <button class="button" onclick="loadReactApp()" style="margin-top: 15px; font-size: 14px; padding: 8px 16px;">
+                    🔄 Try Loading Full React App
+                </button>
             </div>
         </div>
     </div>
     
     <script>
-        // Simple search functionality
+        let reactAppAttempted = false;
+        
         function performSearch() {
             const searchInput = document.getElementById('searchInput');
             const searchResults = document.getElementById('searchResults');
@@ -62,16 +125,71 @@
             if (searchInput.value.trim()) {
                 searchResults.style.display = 'block';
                 resultsList.innerHTML = `
-                    <p style="color: #666; text-align: center; padding: 20px;">
-                        Searching for: <strong>"${searchInput.value}"</strong><br>
-                        <em>Full search functionality requires the complete React app to be working.</em>
-                    </p>
+                    <div style="text-align: center; padding: 20px;">
+                        <p><strong>חיפוש עבור: "${searchInput.value}"</strong></p>
+                        <p style="color: #666; margin-top: 10px;">
+                            🔍 This would search across Rami Levy, Osher Ad, and Mahsani Ashuk<br>
+                            💰 Compare prices and find the best deals<br>
+                            📋 Add items to shopping lists
+                        </p>
+                        <p style="color: #999; font-size: 12px; margin-top: 15px;">
+                            Full search functionality available in the complete React app
+                        </p>
+                    </div>
                 `;
+                searchResults.scrollIntoView({ behavior: 'smooth' });
             }
         }
         
         function showLists() {
-            alert('רשימות קניות - This feature requires the full React app to be working.');
+            alert('📋 רשימות קניות\n\nThis feature allows you to:\n• Create shopping lists for each store\n• Compare total costs\n• Track quantities and prices\n\nFull functionality available in the React app!');
+        }
+        
+        function loadReactApp() {
+            if (reactAppAttempted) {
+                alert('React app loading already attempted. Check browser console for details.');
+                return;
+            }
+            
+            reactAppAttempted = true;
+            const button = event.target;
+            button.innerHTML = '⏳ Loading React App...';
+            button.disabled = true;
+            
+            try {
+                // Minimal React Router setup
+                window.__reactRouterContext = {
+                    "basename": "",
+                    "ssr": false,
+                    "isSpaMode": true,
+                    "future": {},
+                    "routeDiscovery": {"mode": "initial"}
+                };
+                
+                console.log('Attempting to load React app...');
+                
+                // Load React modules
+                const script = document.createElement('script');
+                script.type = 'module';
+                script.src = './client/assets/entry.client-DZAi_oRo.js';
+                script.onload = () => {
+                    console.log('✅ React app loaded successfully!');
+                    button.innerHTML = '✅ React App Loaded!';
+                };
+                script.onerror = (error) => {
+                    console.error('❌ React app failed to load:', error);
+                    button.innerHTML = '❌ React Load Failed';
+                    button.disabled = false;
+                    reactAppAttempted = false;
+                };
+                document.head.appendChild(script);
+                
+            } catch (error) {
+                console.error('Error loading React app:', error);
+                button.innerHTML = '❌ React Load Failed';
+                button.disabled = false;
+                reactAppAttempted = false;
+            }
         }
         
         // Allow Enter key to search
@@ -81,33 +199,8 @@
             }
         });
         
-        console.log('Simplified grocery app loaded successfully');
-        
-        // Still try to load the React app in the background
-        setTimeout(() => {
-            try {
-                // Set up minimal React Router context
-                window.__reactRouterContext = {
-                    "basename": "",
-                    "ssr": false,
-                    "isSpaMode": true
-                };
-                
-                // Try to load React modules silently
-                const script = document.createElement('script');
-                script.type = 'module';
-                script.src = './client/assets/entry.client-DZAi_oRo.js';
-                script.onload = () => {
-                    console.log('React app loaded successfully as fallback');
-                };
-                script.onerror = () => {
-                    console.log('React app failed to load - using fallback interface');
-                };
-                document.head.appendChild(script);
-            } catch (error) {
-                console.log('Using fallback interface due to React Router issues');
-            }
-        }, 1000);
+        console.log('✅ Simplified grocery app loaded successfully');
+        console.log('🛒 App features: Search products, compare prices, manage shopping lists');
     </script>
 </body>
 </html>
