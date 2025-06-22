@@ -4,12 +4,12 @@
   "type": "module",
   "homepage": "https://SeanHacmon.github.io/Grocery-App",
   "scripts": {
-    "build": "vite build",
+    "build": "react-router build",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
     "predeploy": "npm run build",
-    "deploy": "npm run build && gh-pages -d build/client"
+    "deploy": "npm run build && gh-pages -d build/client/client"
   },
   "dependencies": {
     "@react-router/node": "^7.5.3",

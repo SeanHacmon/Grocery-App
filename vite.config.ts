@@ -7,13 +7,11 @@ export default defineConfig({
   base: "/Grocery-App/",
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
   build: {
-    outDir: "build/client",
-    commonjsOptions: {
-      include: [/node_modules/],
-      transformMixedEsModules: true
-    }
+    outDir: "build",
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      },
+    },
   },
-  optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router']
-  }
 });

@@ -2,6 +2,9 @@ import type { Config } from "@react-router/dev/config";
 
 export default {
   ssr: false,
-  basename: "/Grocery-App",
-  buildDirectory: "build/client",
+  buildDirectory: "build",
+  future: {
+    unstable_singleFetch: false,
+    unstable_lazyRouteDiscovery: false,
+  },
 } satisfies Config;
