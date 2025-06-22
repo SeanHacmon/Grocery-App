@@ -3,7 +3,7 @@ import { Welcome } from "../components/welcome";
 export function meta() {
   return [
     { title: "Grocery App" },
-    { name: "description", content: "Orginazation App" },
+    { name: "description", content: "Organization App" },
   ];
 }
 

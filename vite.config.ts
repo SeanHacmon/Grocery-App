@@ -1,12 +1,12 @@
+import { reactRouter } from "@react-router/dev/vite";
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  base: "/Grocery-App/",
-  plugins: [react(), tsconfigPaths()],
+  // base: "/Grocery-App/",
+  plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
   build: {
-    outDir: "build",
+    outDir: "build/client",
   },
-  publicDir: false, // This prevents the public folder from being copied
 });
