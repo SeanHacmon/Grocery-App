@@ -17,14 +17,24 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
         }
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-size: 24px;
+            color: #333;
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px;
+            margin: 20px;
+        }
     </style>
 </head>
 <body>
     <div id="root">
-        <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-            <h1>Loading Grocery App...</h1>
-        </div>
+        <div class="loading">Loading Grocery App...</div>
     </div>
+    
     <script>
         window.__reactRouterContext = {
             "basename": "/Grocery-App",
@@ -40,6 +50,23 @@
             "isSpaMode": true
         };
     </script>
-    <script type="module" src="./assets/entry.client-DZAi_oRo.js"></script>
+    
+    <!-- Note the ./client/assets/ path instead of ./assets/ -->
+    <script type="module" src="./client/assets/entry.client-DZAi_oRo.js"></script>
+    
+    <script>
+        // Fallback error handling
+        setTimeout(() => {
+            const root = document.getElementById('root');
+            if (root.innerHTML.includes('Loading Grocery App...')) {
+                console.log('App failed to load, trying alternative paths...');
+                // Try different possible paths
+                const script = document.createElement('script');
+                script.type = 'module';
+                script.src = './client/assets/index.js';
+                document.head.appendChild(script);
+            }
+        }, 5000);
+    </script>
 </body>
 </html>
