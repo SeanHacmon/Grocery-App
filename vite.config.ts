@@ -4,14 +4,13 @@ import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  base: "/Grocery-App/",
+  base: "/Grocery-App/",  // This should match
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
   build: {
-    outDir: "build",
-    rollupOptions: {
-      output: {
-        manualChunks: undefined,
-      },
-    },
+    outDir: "build/client",
+    commonjsOptions: {
+      include: [/node_modules/],
+      transformMixedEsModules: true
+    }
   },
 });
