@@ -4,7 +4,7 @@ import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  // base: "/Grocery-App/",
+  base: "/Grocery-App/",
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
   build: {
     outDir: "build/client",
