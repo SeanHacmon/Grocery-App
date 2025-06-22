@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"/>
+    <link rel="stylesheet" href="./client/assets/home-BdNU43T4.css"/>
     <style>
         body {
             margin: 0;
@@ -17,23 +18,10 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
         }
-        .loading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-size: 24px;
-            color: #333;
-            background: rgba(255,255,255,0.9);
-            border-radius: 10px;
-            margin: 20px;
-        }
     </style>
 </head>
 <body>
-    <div id="root">
-        <div class="loading">Loading Grocery App...</div>
-    </div>
+    <div id="root"></div>
     
     <script>
         window.__reactRouterContext = {
@@ -49,24 +37,44 @@
             "ssr": false,
             "isSpaMode": true
         };
+        
+        window.__reactRouterRouteModules = {};
     </script>
     
-    <!-- Note the ./client/assets/ path instead of ./assets/ -->
+    <!-- Load the main entry file -->
     <script type="module" src="./client/assets/entry.client-DZAi_oRo.js"></script>
     
+    <!-- Also load other modules that might be needed -->
+    <script type="module" src="./client/assets/root-Dy02bG3G.js"></script>
+    <script type="module" src="./client/assets/home-DrQQwkAl.js"></script>
+    <script type="module" src="./client/assets/chunk-NL6KNZEE-CfxFt-pq.js"></script>
+    
     <script>
-        // Fallback error handling
+        // Debug logging
+        console.log('Index.html loaded');
+        console.log('React Router Context:', window.__reactRouterContext);
+        
+        // Error handling
+        window.addEventListener('error', function(e) {
+            console.error('Script error:', e.error);
+        });
+        
+        // Check if React loaded after a delay
         setTimeout(() => {
             const root = document.getElementById('root');
-            if (root.innerHTML.includes('Loading Grocery App...')) {
-                console.log('App failed to load, trying alternative paths...');
-                // Try different possible paths
-                const script = document.createElement('script');
-                script.type = 'module';
-                script.src = './client/assets/index.js';
-                document.head.appendChild(script);
+            if (!root.innerHTML || root.innerHTML.trim() === '') {
+                console.error('React app failed to mount');
+                root.innerHTML = `
+                    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background: rgba(255,255,255,0.9); margin: 20px; border-radius: 10px;">
+                        <div style="text-align: center;">
+                            <h2>Grocery App</h2>
+                            <p>Loading failed. Please check the browser console for errors.</p>
+                            <button onclick="location.reload()" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">Reload Page</button>
+                        </div>
+                    </div>
+                `;
             }
-        }, 5000);
+        }, 3000);
     </script>
 </body>
 </html>
