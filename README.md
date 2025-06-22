@@ -12,4 +12,4 @@
 # Main Goal
     help group of friends or families to manage household in a more efficent way.
 
-[GroceryApp]([http://localhost:5173/](https://seanhacmon.github.io/Grocery-App/))
+[GroceryApp]([https://seanhacmon.github.io/Grocery-App/])
