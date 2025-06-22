@@ -12,88 +12,102 @@
         body {
             margin: 0;
             font-family: Inter, sans-serif;
-            /* Removed background image that's causing 404 */
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
         }
     </style>
 </head>
 <body>
-    <div id="root"></div>
+    <div id="root">
+        <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background: rgba(255,255,255,0.95); margin: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            <div style="text-align: center; padding: 20px;">
+                <h1 style="color: #333; margin-bottom: 20px;">🛒 Grocery App</h1>
+                <h3 style="color: #666; font-weight: 400; margin-bottom: 30px;">חיפוש מוצרים ברשתות המזון</h3>
+                
+                <div style="margin-bottom: 30px;">
+                    <input type="text" placeholder="...חפש מוצר" style="padding: 12px 16px; font-size: 16px; border: 1px solid #ddd; border-radius: 8px; width: 300px; max-width: 90%; text-align: right;" id="searchInput">
+                </div>
+                
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <button style="background-color: #151d28; color: #f9fafb; padding: 12px 30px; border: none; border-radius: 12px; cursor: pointer; font-size: 16px; font-weight: 500;" onclick="performSearch()">חיפוש</button>
+                    <button style="background-color: #151d28; color: #f9fafb; padding: 12px 30px; border: none; border-radius: 12px; cursor: pointer; font-size: 16px; font-weight: 500;" onclick="showLists()">הצג רשימות</button>
+                </div>
+                
+                <div id="searchResults" style="margin-top: 30px; display: none;">
+                    <h4>תוצאות חיפוש</h4>
+                    <div id="resultsList"></div>
+                </div>
+                
+                <div style="margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.8); border-radius: 8px;">
+                    <p style="color: #666; margin: 0;">
+                        <strong>About this app:</strong><br>
+                        This is a grocery price comparison app for Israeli supermarkets (Rami Levy, Osher Ad, Mahsani Ashuk).
+                        <br><br>
+                        <em>Note: The full React app is currently having deployment issues. This is a simplified version.</em>
+                        <br>
+                        <a href="https://github.com/seanhakmon/Grocery-App" target="_blank" style="color: #007bff; text-decoration: none;">View source on GitHub</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <script>
-        // Properly configure React Router for SPA mode
-        window.__reactRouterContext = {
-            "basename": "",  // Remove the basename for now to test
-            "future": {
-                "unstable_middleware": false,
-                "unstable_optimizeDeps": false,
-                "unstable_splitRouteModules": false,
-                "unstable_subResourceIntegrity": false,
-                "unstable_viteEnvironmentApi": false
-            },
-            "routeDiscovery": {"mode": "initial"},
-            "ssr": false,
-            "isSpaMode": true
-        };
-        
-        // Initialize route modules
-        window.__reactRouterRouteModules = {};
-        
-        // Create a ReadableStream for React Router
-        window.__reactRouterContext.stream = new ReadableStream({
-            start(controller) {
-                window.__reactRouterContext.streamController = controller;
-            }
-        }).pipeThrough(new TextEncoderStream());
-        
-        console.log('Index.html loaded');
-        console.log('React Router Context:', window.__reactRouterContext);
-    </script>
-    
-    <!-- Load modules in the correct order -->
-    <script type="module" src="./client/assets/chunk-NL6KNZEE-CfxFt-pq.js"></script>
-    <script type="module" src="./client/assets/root-Dy02bG3G.js"></script>
-    <script type="module">
-        // Import route modules
-        import * as route0 from "./client/assets/root-Dy02bG3G.js";
-        window.__reactRouterRouteModules = {"root": route0};
-        
-        // Then load the main entry
-        import("./client/assets/entry.client-DZAi_oRo.js");
-    </script>
-    
-    <script>
-        // Stream controller setup
-        setTimeout(() => {
-            if (window.__reactRouterContext && window.__reactRouterContext.streamController) {
-                window.__reactRouterContext.streamController.enqueue('[{"_1":2,"_3":-5,"_4":-5},"loaderData",{},"actionData","errors"]\n');
-                window.__reactRouterContext.streamController.close();
-            }
-        }, 100);
-        
-        // Error handling and fallback
-        window.addEventListener('error', function(e) {
-            console.error('Script error:', e.error, e.filename, e.lineno);
-        });
-        
-        setTimeout(() => {
-            const root = document.getElementById('root');
-            if (!root.innerHTML || root.innerHTML.trim() === '') {
-                console.error('React app failed to mount');
-                root.innerHTML = `
-                    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background: rgba(255,255,255,0.95); margin: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <div style="text-align: center; padding: 20px;">
-                            <h2 style="color: #333; margin-bottom: 10px;">🛒 Grocery App</h2>
-                            <p style="color: #666; margin-bottom: 20px;">App failed to load properly</p>
-                            <button onclick="location.reload()" style="padding: 12px 24px; font-size: 16px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 6px;">🔄 Reload Page</button>
-                            <br><br>
-                            <small style="color: #999;">Check browser console for technical details</small>
-                        </div>
-                    </div>
+        // Simple search functionality
+        function performSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            const resultsList = document.getElementById('resultsList');
+            
+            if (searchInput.value.trim()) {
+                searchResults.style.display = 'block';
+                resultsList.innerHTML = `
+                    <p style="color: #666; text-align: center; padding: 20px;">
+                        Searching for: <strong>"${searchInput.value}"</strong><br>
+                        <em>Full search functionality requires the complete React app to be working.</em>
+                    </p>
                 `;
             }
-        }, 5000);
+        }
+        
+        function showLists() {
+            alert('רשימות קניות - This feature requires the full React app to be working.');
+        }
+        
+        // Allow Enter key to search
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+        
+        console.log('Simplified grocery app loaded successfully');
+        
+        // Still try to load the React app in the background
+        setTimeout(() => {
+            try {
+                // Set up minimal React Router context
+                window.__reactRouterContext = {
+                    "basename": "",
+                    "ssr": false,
+                    "isSpaMode": true
+                };
+                
+                // Try to load React modules silently
+                const script = document.createElement('script');
+                script.type = 'module';
+                script.src = './client/assets/entry.client-DZAi_oRo.js';
+                script.onload = () => {
+                    console.log('React app loaded successfully as fallback');
+                };
+                script.onerror = () => {
+                    console.log('React app failed to load - using fallback interface');
+                };
+                document.head.appendChild(script);
+            } catch (error) {
+                console.log('Using fallback interface due to React Router issues');
+            }
+        }, 1000);
     </script>
 </body>
 </html>
