@@ -7,10 +7,6 @@ export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   build: {
     outDir: "build",
-    rollupOptions: {
-      input: {
-        main: "./public/index.html"
-      }
-    }
   },
+  publicDir: false, // This prevents the public folder from being copied
 });
