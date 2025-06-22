@@ -1,16 +1,16 @@
-import { reactRouter } from "@react-router/dev/vite";
-import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  base: "/Grocery-App/",  // This should match
-  plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
+  base: "/Grocery-App/",
+  plugins: [react(), tsconfigPaths()],
   build: {
-    outDir: "build/client",
-    commonjsOptions: {
-      include: [/node_modules/],
-      transformMixedEsModules: true
+    outDir: "build",
+    rollupOptions: {
+      input: {
+        main: "./public/index.html"
+      }
     }
   },
 });
