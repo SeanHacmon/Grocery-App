@@ -8,5 +8,12 @@ export default defineConfig({
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
   build: {
     outDir: "build/client",
+    commonjsOptions: {
+      include: [/node_modules/],
+      transformMixedEsModules: true
+    }
   },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router']
+  }
 });

@@ -4,7 +4,7 @@
   "type": "module",
   "homepage": "https://SeanHacmon.github.io/Grocery-App",
   "scripts": {
-    "build": "NODE_ENV=production react-router build",
+    "build": "vite build",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
