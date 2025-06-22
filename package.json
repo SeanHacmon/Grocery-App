@@ -9,7 +9,7 @@
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
     "predeploy": "npm run build",
-    "deploy": "npm run build && gh-pages -d build/client/client"
+    "deploy": "npm run build && gh-pages -d build"
   },
   "dependencies": {
     "@react-router/node": "^7.5.3",
