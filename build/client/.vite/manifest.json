@@ -1,0 +1,36 @@
+{
+  "_chunk-NL6KNZEE-CfxFt-pq.js": {
+    "file": "assets/chunk-NL6KNZEE-CfxFt-pq.js",
+    "name": "chunk-NL6KNZEE"
+  },
+  "app/root.tsx?__react-router-build-client-route": {
+    "file": "assets/root-Dy02bG3G.js",
+    "name": "root",
+    "src": "app/root.tsx?__react-router-build-client-route",
+    "isEntry": true,
+    "imports": [
+      "_chunk-NL6KNZEE-CfxFt-pq.js"
+    ]
+  },
+  "app/routes/home.tsx?__react-router-build-client-route": {
+    "file": "assets/home-DrQQwkAl.js",
+    "name": "home",
+    "src": "app/routes/home.tsx?__react-router-build-client-route",
+    "isEntry": true,
+    "imports": [
+      "_chunk-NL6KNZEE-CfxFt-pq.js"
+    ],
+    "css": [
+      "assets/home-BdNU43T4.css"
+    ]
+  },
+  "node_modules/@react-router/dev/dist/config/defaults/entry.client.tsx": {
+    "file": "assets/entry.client-DZAi_oRo.js",
+    "name": "entry.client",
+    "src": "node_modules/@react-router/dev/dist/config/defaults/entry.client.tsx",
+    "isEntry": true,
+    "imports": [
+      "_chunk-NL6KNZEE-CfxFt-pq.js"
+    ]
+  }
+}

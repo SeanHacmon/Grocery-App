@@ -3,5 +3,5 @@
 
 # React Router
 /.react-router/
-/build/
+# /build/
 /Users/seanhakmon/Projects/PortfolioProjects/GroceriesApp/app/data/ramiLevy.json
