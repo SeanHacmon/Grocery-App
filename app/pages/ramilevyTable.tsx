@@ -50,10 +50,10 @@ export function RamiLevyTable({
         <div className="table-container"> 
             <div className="table-column">
                 <img
-                    src={'./images/ramiLevy-image.jpg'}
+                    src={'./images/ramilevy.jpg'}
                     className="table-product-image"
                     onError={(e) => {
-                        e.target.src = './images/ramiLevy-image.jpg';
+                        e.target.src = './images/ramilevy.jpg';
                     }}
                 />
                 <table className="dictionary-table">

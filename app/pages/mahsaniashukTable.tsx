@@ -55,10 +55,10 @@ export function MahsaniAshukTable({
         <div className="table-container"> 
             <div className="table-column">
                 <img
-                    src={'./images/mahsaniAshuk-image.jpg'}
+                    src={'./images/mahsaniashuk.jpg'}
                     className="table-product-image"
                     onError={(e) => {
-                        e.target.src = './images/mahsaniAshuk-image.jpg';
+                        e.target.src = './images/mahsaniashuk.jpg';
                     }}
                 />
                 <table className="dictionary-table">
