@@ -49,10 +49,10 @@ export function OsherAdTable({
         <div className="table-container"> {/* Changed from span to div */}
             <div className="table-column">
                 <img
-                    src={'/images/OsherAd-image.png'}
+                    src={'./images/OsherAd-image.png'}
                     className="table-product-image"
                     onError={(e) => {
-                        e.target.src = '/images/OsherAd-image.png';
+                        e.target.src = './images/OsherAd-image.png';
                     }}
                 />
                 <table className="dictionary-table">
