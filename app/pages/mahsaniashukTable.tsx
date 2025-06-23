@@ -1,6 +1,6 @@
 import "../design/grocerylist.css";
 import { mahsaniAshukDict } from "../components/groceryList"; // Add this import
-
+import mahsaniImage from "../../images/mahsaniashuk.jpg";
 export function MahsaniAshukTable({
     currentListOsher, 
     setCurrentListOsher, 
@@ -55,10 +55,10 @@ export function MahsaniAshukTable({
         <div className="table-container"> 
             <div className="table-column">
                 <img
-                    src={'./images/mahsaniashuk.jpg'}
+                    src={mahsaniImage}
                     className="table-product-image"
                     onError={(e) => {
-                        e.target.src = './images/mahsaniashuk.jpg';
+                        e.target.src = mahsaniImage;
                     }}
                 />
                 <table className="dictionary-table">

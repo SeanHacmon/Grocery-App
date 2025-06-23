@@ -1,5 +1,6 @@
 import "../design/grocerylist.css";
 import { osherAdDict } from "../components/groceryList"; // Add this import
+import osherImage from "../../images/osherad.jpg";
 
 export function OsherAdTable({
     currentListOsher, 
@@ -49,10 +50,10 @@ export function OsherAdTable({
         <div className="table-container"> {/* Changed from span to div */}
             <div className="table-column">
                 <img
-                    src={'./images/osherad.jpg'}
+                    src={osherImage}
                     className="table-product-image"
                     onError={(e) => {
-                        e.target.src = './images/osherad.jpg';
+                        e.target.src = osherImage;
                     }}
                 />
                 <table className="dictionary-table">

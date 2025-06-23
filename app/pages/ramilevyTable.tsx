@@ -1,5 +1,6 @@
 import "../design/grocerylist.css";
 import { ramiLevyDict } from "../components/groceryList"; // Add this import
+import ramiLevyImage from "../../images/ramilevy.jpg";
 
 export function RamiLevyTable({
     currentListOsher, 
@@ -50,7 +51,7 @@ export function RamiLevyTable({
         <div className="table-container"> 
             <div className="table-column">
                 <img
-                    src={'./images/ramilevy.jpg'}
+                    src={ramiLevyImage}
                     className="table-product-image"
                     onError={(e) => {
                         e.target.src = './images/ramilevy.jpg';
