@@ -1,27 +1,17 @@
+// app/components/searchbar.tsx
 import { useState } from "react";
 import '../design/searchbar.css';
 import '../design/button.css';
 import { osherAdDict, ramiLevyDict, mahsaniAshukDict } from "./groceryList";
+import { useShoppingContext } from "../contexts/ShoppingContext";
 
-export function SearchBar({
-  currentListOsher,
-  setCurrentListOsher,
-  currentListRami,
-  setCurrentListRami,
-  currentListMahsani,
-  setCurrentListMahsani,
-  totalCostOsher,
-  setTotalCostOsher,
-  totalCostRami,
-  setTotalCostRami,
-  totalCostMahsani,
-  setTotalCostMahsani,
-  addProductToOsher,
-  addProductToRami,
-  addProductToMahsani,
-  addProductToAll,
-  onShowTables
-}) {
+interface SearchBarProps {
+  onShowTables: () => void;
+}
+
+export function SearchBar({ onShowTables }: SearchBarProps) {
+  const { addProductToAll } = useShoppingContext();
+  
   const [searchTerm, setSearchTerm] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
@@ -41,7 +31,7 @@ export function SearchBar({
     onShowTables();
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (!showSuggestions || filteredItems.length === 0) return;
 
     switch (e.key) {
@@ -68,7 +58,7 @@ export function SearchBar({
     }
   };
 
-  const handleSelect = (itemName) => {
+  const handleSelect = (itemName: string) => {
     setSearchTerm(itemName);
     setShowSuggestions(false);
     setSelectedIndex(-1);
@@ -144,21 +134,18 @@ export function SearchBar({
               const ramiItem = ramiLevyDict[itemName];
               const osherItem = osherAdDict[itemName];
               const mahsaniItem = mahsaniAshukDict[itemName];
-              // const imageCode = ramiItem?.itemcode || 'default';
-              // const imageCode = ramiItem?.itemcode || osherItem?.itemcode || 'default';
               const imageCode = ramiItem?.image || osherItem?.image || mahsaniItem?.image || 'https://img.rami-levy.co.il/product/default/small.jpg';
+              
               return (
                 <div key={itemName} className="product-card">
                   <div className="product-image">
                     <img
-                        className="search-product-image"
-                      // src={`https://img.rami-levy.co.il/product/${imageCode}/small.jpg`}
+                      className="search-product-image"
                       src={imageCode}
                       alt={itemName}
                       onError={(e) => {
-                        // console.log(imageCode);
                         console.log(ramiItem);
-                        e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Crect width='150' height='150' fill='%23f0f0f0'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='14' fill='%23999'%3ENo Image%3C/text%3E%3C/svg%3E";
+                        e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Crect width='150' height='150' fill='%23f0f0f0'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='14' fill='%23999'%3ENo Image%3C/text%3E%3C/svg%3E";
                       }}
                     />
                   </div>

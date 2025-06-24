@@ -1,25 +1,33 @@
-import { RamiLevyTable } from "~/pages/ramilevytable";
-import { OsherAdTable } from "~/pages/osheradTable";
-import { MahsaniAshukTable } from "~/pages/mahsaniashukTable";
+// app/pages/tablesPage.tsx
+import { GenericStoreTable } from "../components/GenericStoreTable";
+import ramiLevyImage from "../../images/ramilevy.jpg";
+import osherImage from "../../images/osherad.jpg";
+import mahsaniImage from "../../images/mahsaniashuk.jpg";
 
-export function TablesPage({
-  currentListOsher,
-  setCurrentListOsher,
-  currentListRami,
-  setCurrentListRami,
-  currentListMahsani,
-  setCurrentListMahsani,
-  addProductToOsher,
-  addProductToRami,
-  addProductToMahsani,
-  totalCostOsher,
-  setTotalCostOsher,
-  totalCostRami,
-  setTotalCostRami,
-  totalCostMahsani,
-  setTotalCostMahsani,
-  onBackToSearch
-}) {
+interface TablesPageProps {
+  onBackToSearch: () => void;
+}
+
+// Store configurations
+const storeConfigs = [
+  {
+    name: 'rami' as const,
+    displayName: 'רמי לוי',
+    image: ramiLevyImage
+  },
+  {
+    name: 'osher' as const,
+    displayName: 'אושר אד',
+    image: osherImage
+  },
+  {
+    name: 'mahsani' as const,
+    displayName: 'מחסני השוק',
+    image: mahsaniImage
+  }
+];
+
+export function TablesPage({ onBackToSearch }: TablesPageProps) {
   return (
     <div style={{ padding: '20px' }}>
       <div style={{ marginBottom: '20px' }}>
@@ -39,7 +47,9 @@ export function TablesPage({
         </button>
       </div>
       
-      <h3 style={{ textAlign: 'center', marginBottom: '20px', fontSize: "40px" }}>רשימות קניות</h3>
+      <h3 style={{ textAlign: 'center', marginBottom: '20px', fontSize: "40px" }}>
+        רשימות קניות
+      </h3>
       
       <div style={{ 
         display: 'grid', 
@@ -48,63 +58,14 @@ export function TablesPage({
         maxWidth: '1400px',
         margin: '0 auto'
       }}>
-        <div style={{ transform: 'scale(0.95)', transformOrigin: 'top' }}>
-          <RamiLevyTable
-            currentListOsher={currentListOsher}
-            setCurrentListOsher={setCurrentListOsher}
-            currentListRami={currentListRami}
-            setCurrentListRami={setCurrentListRami}
-            currentListMahsani={currentListMahsani}
-            setCurrentListMahsani={setCurrentListMahsani}
-            addProductToOsher={addProductToOsher}
-            addProductToRami={addProductToRami}
-            addProductToMahsani={addProductToMahsani}
-            totalCostOsher={totalCostOsher}
-            setTotalCostOsher={setTotalCostOsher}
-            totalCostRami={totalCostRami}
-            setTotalCostRami={setTotalCostRami}
-            totalCostMahsani={totalCostMahsani}
-            setTotalCostMahsani={setTotalCostMahsani}
-          />
-        </div>
-        <div style={{ transform: 'scale(0.95)', transformOrigin: 'top' }}>
-          <OsherAdTable
-            currentListOsher={currentListOsher}
-            setCurrentListOsher={setCurrentListOsher}
-            currentListRami={currentListRami}
-            setCurrentListRami={setCurrentListRami}
-            currentListMahsani={currentListMahsani}
-            setCurrentListMahsani={setCurrentListMahsani}
-            addProductToOsher={addProductToOsher}
-            addProductToRami={addProductToRami}
-            addProductToMahsani={addProductToMahsani}
-            totalCostOsher={totalCostOsher}
-            setTotalCostOsher={setTotalCostOsher}
-            totalCostRami={totalCostRami}
-            setTotalCostRami={setTotalCostRami}
-            totalCostMahsani={totalCostMahsani}
-            setTotalCostMahsani={setTotalCostMahsani}
-          />
-        </div>
-        <div style={{ transform: 'scale(0.95)', transformOrigin: 'top' }}>
-          <MahsaniAshukTable
-            currentListOsher={currentListOsher}
-            setCurrentListOsher={setCurrentListOsher}
-            currentListRami={currentListRami}
-            setCurrentListRami={setCurrentListRami}
-            currentListMahsani={currentListMahsani}
-            setCurrentListMahsani={setCurrentListMahsani}
-            addProductToOsher={addProductToOsher}
-            addProductToRami={addProductToRami}
-            addProductToMahsani={addProductToMahsani}
-            totalCostOsher={totalCostOsher}
-            setTotalCostOsher={setTotalCostOsher}
-            totalCostRami={totalCostRami}
-            setTotalCostRami={setTotalCostRami}
-            totalCostMahsani={totalCostMahsani}
-            setTotalCostMahsani={setTotalCostMahsani}
-          />
-        </div>
+        {storeConfigs.map((storeConfig) => (
+          <div 
+            key={storeConfig.name}
+            style={{ transform: 'scale(0.95)', transformOrigin: 'top' }}
+          >
+            <GenericStoreTable storeConfig={storeConfig} />
+          </div>
+        ))}
       </div>
     </div>
   );
